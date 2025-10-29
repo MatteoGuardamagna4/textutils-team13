@@ -23,3 +23,6 @@ def average_word_length(text: str) -> float:
     total = sum(len(w) for w in words)
     return total / len(words)
 
+def unique_words(text: str) -> list:
+    words = text.lower().split()
+    return sorted(set(words))
