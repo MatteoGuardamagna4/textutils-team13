@@ -13,3 +13,8 @@ def test_average_word_length_spaces_and_empty():
 
 def test_average_word_length_mixed():
     assert math.isclose(average_word_length("This  is   text."), 10/3, rel_tol=1e-9)
+import textutils.core as c
+
+def test_unique_words():
+    text = "Red red BLUE"
+    assert c.unique_words(text) == ["blue", "red"]
