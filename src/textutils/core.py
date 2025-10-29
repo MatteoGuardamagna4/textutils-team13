@@ -1,7 +1,6 @@
 def count_vowels(text: str) -> int:
     """
     Return the total count of vowels (case-insensitive) in the input string.
-    Example: "Hello World" -> 3 (e, o, o)
     """
     vowels = "aeiouAEIOU"
     count = 0
@@ -10,3 +9,5 @@ def count_vowels(text: str) -> int:
             count += 1
     return count
 
+result1 = count_vowels("Hello World")
+print(result1)
