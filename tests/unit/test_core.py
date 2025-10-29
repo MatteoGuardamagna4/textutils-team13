@@ -1,15 +1,17 @@
-import math
-from textutils import average_word_length
+mport textutils.core as c
 
-def test_average_word_length_basic():
-    assert average_word_length("Hello world") == 5.0
+def test_count_sentences_basic():
+    text = "Hello world. How are you? Bye!"
+    assert c.count_sentences(text) == 3
 
-def test_average_word_length_punctuation():
-    assert average_word_length("Hello, world!") == 5.0
+def test_count_sentences_trailing_spaces():
+    text = "Test.  "
+    assert c.count_sentences(text) == 1
 
-def test_average_word_length_spaces_and_empty():
-    assert average_word_length("   ") == 0.0
-    assert average_word_length("") == 0.0
+def test_count_sentences_empty():
+    text = ""
+    assert c.count_sentences(text) == 0
 
-def test_average_word_length_mixed():
-    assert math.isclose(average_word_length("This  is   text."), 10/3, rel_tol=1e-9)
+def test_count_sentences_mixed_punctuation():
+    text = "A! B? C."
+    assert c.count_sentences(text) == 3
