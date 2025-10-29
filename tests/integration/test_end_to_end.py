@@ -1,4 +1,4 @@
-mport textutils.core as c
+import textutils.core as c
 
 def test_count_sentences_basic():
     text = "Hello world. How are you? Bye!"
