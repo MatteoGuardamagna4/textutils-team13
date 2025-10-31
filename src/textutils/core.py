@@ -1,13 +1,10 @@
-def count_vowels(text: str) -> int:
-    """
-    Return the total count of vowels (case-insensitive) in the input string.
-    """
-    vowels = "aeiouAEIOU"
-    count = 0
-    for char in text:
-        if char in vowels:
-            count += 1
-    return count
+def test_count_vowels_basic():
+    text = "Hello World"
+    result = c.count_vowels(text)
+    print(f"The number of vowels in '{text}' is: {result}")
 
-result1 = count_vowels("Hello World")
-print(result1)
+def test_check_for_vowels(text="Hello World"):
+    result = c.count_vowels(text)
+    has_vowels = result > 0
+    print(f"Text: '{text}'")
+    print(f"Does the text contain any vowels? {has_vowels}")
