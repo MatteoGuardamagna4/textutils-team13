@@ -2,18 +2,30 @@ from unicodedata import normalize
 import string
 import re
 
-def count_sentences(text):
+
+def count_sentences(text: str) -> int:
+    """
+    Return the number of sentences in the given text.
+    Sentences are split using '.', '!', or '?' as delimiters.
+    """
     sentences = re.split(r'[.!?]+', text)
     sentences = [s.strip() for s in sentences if s.strip()]
     return len(sentences)
 
-def unique_words(text: str) -> list:
+
+def unique_words(text: str) -> list[str]:
+    """
+    Return a sorted list of unique words in lowercase.
+    """
     words = text.lower().split()
     return sorted(set(words))
 
+
 def word_count(text: str) -> dict[str, int]:
-    """Return a case-insensitive word frequency dict.
-    Example: "Red red BLUE" -> {"red": 2, "blue": 1}
+    """
+    Return a case-insensitive word frequency dictionary.
+    Example:
+        "Red red BLUE" -> {"red": 2, "blue": 1}
     """
     counts = {}
     words = text.lower().split()
@@ -24,35 +36,36 @@ def word_count(text: str) -> dict[str, int]:
 
 def slugify(text: str) -> str:
     """
-    Convierte `text` en un slug seguro:
-    - Convierte a minúsculas.
-    - Normaliza caracteres unicode (elimina acentos).
-    - Elimina caracteres que no son letras o números.
-    - Sustituye espacios y separadores por guiones.
-    - Quita guiones duplicados, al inicio y final.
-    - Devuelve una cadena vacía si no hay texto útil.
+    Convert text into a URL-safe slug:
+    - Convert to lowercase.
+    - Normalize Unicode characters (remove accents).
+    - Remove non-alphanumeric characters.
+    - Replace spaces and hyphens with a single hyphen.
+    - Trim hyphens at the start and end.
+    - Return an empty string if the text is invalid or empty.
     """
     if not isinstance(text, str) or not text.strip():
         return ''
-    
-    # Convertir a minúsculas y normalizar unicode
+
+    # Convert to lowercase and normalize Unicode
     t = text.lower()
     t = normalize('NFKD', t).encode('ascii', 'ignore').decode('ascii')
-    
-    # Reemplazar todo lo que no sea letra, número o espacio por espacio
+
+    # Remove non-alphanumeric characters
     t = re.sub(r'[^a-z0-9\s-]', '', t)
-    
-    # Reemplazar espacios y guiones múltiples por un solo guion
+
+    # Replace multiple spaces or hyphens with a single hyphen
     t = re.sub(r'[\s-]+', '-', t)
-    
-    # Quitar guiones al inicio y final
+
+    # Trim leading/trailing hyphens
     t = t.strip('-')
-    
+
     return t
+
 
 def count_vowels(text: str) -> int:
     """
-    Return the total count of vowels (case-insensitive) in the input string.
+    Return the total number of vowels (case-insensitive) in the input text.
     """
     vowels = "aeiouAEIOU"
     count = 0
@@ -61,28 +74,37 @@ def count_vowels(text: str) -> int:
             count += 1
     return count
 
-result1 = count_vowels("Hello World")
-print(result1)
-    
+
 def average_word_length(text: str) -> float:
     """
-    Promedio de caracteres por palabra en `text`.
-    - Divide por espacios.
-    - Quita puntuación al inicio/fin de cada token.
-    - Ignora tokens vacíos.
-    - Devuelve 0.0 si no hay palabras.
+    Return the average number of characters per word in the given text.
+    - Splits by spaces.
+    - Removes punctuation from the start and end of each word.
+    - Ignores empty tokens.
+    - Returns 0.0 if no words are found.
     """
     if not isinstance(text, str) or not text.strip():
         return 0.0
 
     words = []
-    for tok in text.split():
-        w = tok.strip(string.punctuation)
-        if w:
-            words.append(w)
+    for token in text.split():
+        word = token.strip(string.punctuation)
+        if word:
+            words.append(word)
 
     if not words:
         return 0.0
 
-    total = sum(len(w) for w in words)
-    return total / len(words)
+    total_length = sum(len(word) for word in words)
+    return total_length / len(words)
+
+
+# Example usage
+if _name_ == "_main_":
+    sample = "Hello, world! This is a test. How many vowels are here?"
+    print("Sentence count:", count_sentences(sample))
+    print("Unique words:", unique_words(sample))
+    print("Word count:", word_count(sample))
+    print("Slugified:", slugify(sample))
+    print("Vowel count:", count_vowels(sample))
+    print("Average word length:", average_word_length(sample))
