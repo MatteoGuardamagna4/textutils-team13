@@ -1,15 +1,31 @@
+import string
 import re
 from unicodedata import normalize
 
-def slugify(text):
-    # Lowercase the text and remove apostrophes from contractions
-    text = re.sub(r"(\w)['’](\w)", r"\1\2", text.lower())
-    # Replace all non-word characters and underscores with hyphens
-    text = re.sub(r'[\W_]+', '-', text).strip('-')
-    # Optionally normalize unicode (remove accents, etc.)
-    text = normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
-    # Remove any leftover non-alphanumeric characters
-    text = re.sub(r'[^a-z0-9-]', '', text)
-    # Collapse multiple hyphens
-    text = re.sub(r'-+', '-', text)
-    return text
+def slugify(text: str) -> str:
+    """
+    Convierte `text` en un slug seguro:
+    - Convierte a minúsculas.
+    - Normaliza caracteres unicode (elimina acentos).
+    - Elimina caracteres que no son letras o números.
+    - Sustituye espacios y separadores por guiones.
+    - Quita guiones duplicados, al inicio y final.
+    - Devuelve una cadena vacía si no hay texto útil.
+    """
+    if not isinstance(text, str) or not text.strip():
+        return ''
+    
+    # Convertir a minúsculas y normalizar unicode
+    t = text.lower()
+    t = normalize('NFKD', t).encode('ascii', 'ignore').decode('ascii')
+    
+    # Reemplazar todo lo que no sea letra, número o espacio por espacio
+    t = re.sub(r'[^a-z0-9\s-]', '', t)
+    
+    # Reemplazar espacios y guiones múltiples por un solo guion
+    t = re.sub(r'[\s-]+', '-', t)
+    
+    # Quitar guiones al inicio y final
+    t = t.strip('-')
+    
+    return t
