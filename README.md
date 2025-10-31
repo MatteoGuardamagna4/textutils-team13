@@ -6,7 +6,7 @@ The owner of the repository should send an invitation to the rest of the team. O
    git clone https://github.com/<owner>/textutils-<team>.git
    ```
    This will create a local copy of the shared project on your computer.
-Environment of our team: environment.yml
+Environment of our team: environment.yml/n
 On your terminal, enter this:
 micromamba create -f environment.yml -y
 micromamba activate textutils
@@ -20,5 +20,5 @@ In our main branch, you can find these functions:
 *count_vowels – counts vowels (a, e, i, o, u) → Example: "Education" → 5
 *unique_words – returns unique words alphabetically → Example: "red red blue" → ['blue', 'red']
 *sentence_count – counts sentences → Example: "Hi! How are you?" → 2
-*slugify – makes a lowercase, hyphenated string → Example: "Hello World!" → "hello-world"
+*slugify – makes a lowercase, hyphenated string → Example: "Hello World!" → "hello-world" 
 
