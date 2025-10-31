@@ -25,6 +25,7 @@ def count_sentences(text: str) -> int:
 
     # Filter out any empty strings that may result from split
     sentences = [s for s in sentences if s]
+    return sentences
 
 def unique_words(text: str) -> list:
     words = text.lower().split()
