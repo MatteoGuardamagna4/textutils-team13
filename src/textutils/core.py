@@ -1,25 +1,27 @@
-import string
+import re
 
-def average_word_length(text: str) -> float:
+def count_sentences(text: str) -> int:
     """
-    Promedio de caracteres por palabra en `text`.
-    - Divide por espacios.
-    - Quita puntuación al inicio/fin de cada token.
-    - Ignora tokens vacíos.
-    - Devuelve 0.0 si no hay palabras.
+    Counts the number of sentences in the given text.
+
+    A sentence is defined as a sequence of characters ending with one of
+    the following punctuation marks: '.', '?', or '!'.
+
+    - Ignores trailing whitespace or punctuation-only fragments.
+    - Returns 0 if text is empty or has no sentence-ending punctuation.
+    Examples:
+        "Hello world. How are you? Bye!" -> 3
+        "Test.  " -> 1
+        "" -> 0
+        "A! B? C." -> 3
     """
     if not isinstance(text, str) or not text.strip():
-        return 0.0
+        return 0
 
-    words = []
-    for tok in text.split():
-        w = tok.strip(string.punctuation)
-        if w:
-            words.append(w)
+    # Use regex to split text by ., ?, or ! followed by optional spaces
+    sentences = re.split(r'[.!?]+\s*', text.strip())
 
-    if not words:
-        return 0.0
+    # Filter out any empty strings that may result from split
+    sentences = [s for s in sentences if s]
 
-    total = sum(len(w) for w in words)
-    return total / len(words)
-
+    return len(sentences)
