@@ -10,7 +10,7 @@ micromamba create -f environment.yml -y.
 micromamba activate textutils.
 With this, now you will have the same environment as the host of the repository.
 Run test.
-In the terminal, enter pytes,t and this will check if there is any error in the functions.
+In the terminal, First do pip install -e and than  enter pytest and this will check if there is any error in the functions.
 Project does:
 In our main branch, you can find these functions:
 *word_counts – counts the words in the input → Example: "Hello world" → 2
