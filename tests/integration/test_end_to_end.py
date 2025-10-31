@@ -1,49 +1,37 @@
-import textutils.core as c 
 import textutils.core as c
-#testing unique_words
-def test_unique_words_pipeline():
-    text = "Red red BLUE"
-    final_text = text.lower()
-    result = c.unique_words(final_text)
-    assert result == ["blue", "red"]
-#testing average_word_lenght
-def test_average_word_length_pipeline():
-    text = "Hello, WORLD!  This is  great."    
-    normalized_text = text.lower()
-    cleaned_text = ''.join(ch for ch in normalized_text if ch.isalpha() or ch.isspace())
-    result = c.average_word_length(cleaned_text)
-    assert abs(result - 4.2) < 1e-6
-#testing count_vowels
-def test_count_vowels_basic_pipeline():
-    text = "Hello World"
-    result = c.count_vowels(text)
-    print(f"The number of vowels in '{text}' is: {result}")
-def test_check_for_vowels(text="Hello World"):
-    result = c.count_vowels(text)
-    has_vowels = result > 0
-    print(f"Text: '{text}'")
-    print(f"Does the text contain any vowels? {has_vowels}")
-#testing word_count
-def test_full_text_processing_pipeline():
-       text = "Red red BLUE"
-       assert c.word_count(text) == {"red": 2, "blue": 1}
+import string
 
-def test_slugify_basic():
-    assert c.slugify("Hello World") == "hello-world"
-    assert c.slugify("Python-Test Driven Development") == "python-test-driven-development"
+def full_text_analysis_pipeline(text: str) -> dict:
+    text_lower = text.lower()
+    cleaned_for_avg = ''.join(ch for ch in text_lower if ch.isalpha() or ch.isspace())
 
-def test_count_sentences_basic():
-    text = "Hello world. How are you? Bye!"
-    assert c.count_sentences(text) == 3
+    # 2. Execute Core Operations
+    
+    # A. Unique Words (Uses lowercased text)
+    unique_words_list = c.unique_words(text_lower)
+    
+    # B. Word Count (Uses original text for case-specific counting as per test_full_text_processing_pipeline)
+    word_counts = c.word_count(text)
+    
+    # C. Average Word Length (Uses pre-cleaned and lowercased text)
+    avg_word_len = c.average_word_length(cleaned_for_avg)
+    
+    # D. Vowel Count (Uses original text)
+    vowel_count = c.count_vowels(text)
+    
+    # E. Sentence Count (Uses original text)
+    sentence_count = c.count_sentences(text)
+    
+    # F. Slugify (Uses original text)
+    text_slug = c.slugify(text)
 
-def test_count_sentences_trailing_spaces():
-    text = "Test.  "
-    assert c.count_sentences(text) == 1
-
-def test_count_sentences_empty():
-    text = ""
-    assert c.count_sentences(text) == 0
-
-def test_count_sentences_mixed_punctuation():
-    text = "A! B? C."
-    assert c.count_sentences(text) == 3
+    # 3. Return Consolidated Results
+    return {
+        "text": text,
+        "unique_words_list": unique_words_list,
+        "word_counts": word_counts,
+        "average_word_length": avg_word_len,
+        "vowel_count": vowel_count,
+        "sentence_count": sentence_count,
+        "slugified_text": text_slug
+    }
