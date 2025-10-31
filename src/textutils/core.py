@@ -99,12 +99,3 @@ def average_word_length(text: str) -> float:
     return total_length / len(words)
 
 
-# Example usage
-if _name_ == "_main_":
-    sample = "Hello, world! This is a test. How many vowels are here?"
-    print("Sentence count:", count_sentences(sample))
-    print("Unique words:", unique_words(sample))
-    print("Word count:", word_count(sample))
-    print("Slugified:", slugify(sample))
-    print("Vowel count:", count_vowels(sample))
-    print("Average word length:", average_word_length(sample))
