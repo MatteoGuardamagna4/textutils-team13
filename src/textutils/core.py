@@ -3,7 +3,6 @@ import re
 def camel_to_snake(name: str) -> str:
     """
     Convert CamelCase / mixedCase identifiers to snake_case.
-
     Rules:
     - Insert '_' when a lowercase/digit is followed by an uppercase.
     - Split acronym runs: 'XMLHttp' -> 'XML_Http'.
