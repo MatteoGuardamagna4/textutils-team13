@@ -1,17 +1,15 @@
 Guide to clone our repo. 
-Clone the repository
-git clone [https://github.com/<owner>/textutils-<team>.git](https://github.com/MatteoGuardamagna4/textutils-team13)
+Clone the repository using the code below in your terminal 
 The owner of the repository should send an invitation to the rest of the team. Once the invitation is accepted, every team member should clone the repository to their local machine:
-   ```bash
-   git clone https://github.com/<owner>/textutils-<team>.git
+   git clone (https://github.com/MatteoGuardamagna4/textutils-team13)
    ```
    This will create a local copy of the shared project on your computer.
-Environment of our team: environment.yml/n
+Environment of our team: environment.yml.
 On your terminal, enter this:
-micromamba create -f environment.yml -y
-micromamba activate textutils
-With this, now you will have the same environment as the host of the repository
-Run test
+micromamba create -f environment.yml -y.
+micromamba activate textutils.
+With this, now you will have the same environment as the host of the repository.
+Run test.
 In the terminal, enter pytes,t and this will check if there is any error in the functions.
 Project does:
 In our main branch, you can find these functions:
