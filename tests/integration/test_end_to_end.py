@@ -22,3 +22,7 @@ def test_check_for_vowels(text="Hello World"):
     has_vowels = result > 0
     print(f"Text: '{text}'")
     print(f"Does the text contain any vowels? {has_vowels}")
+#testing word_count
+def test_full_text_processing_pipeline():
+       text = "Red red BLUE"
+       assert c.word_count(text) == {"red": 2, "blue": 1}

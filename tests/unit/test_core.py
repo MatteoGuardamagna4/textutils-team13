@@ -2,6 +2,8 @@ import math
 #testing unique_words
 #testing average_word_lenght
 #testing count_vowels
+#testing word_count
+
 from textutils import average_word_length
 def test_average_word_length_basic():
     assert average_word_length("Hello world") == 5.0
@@ -24,3 +26,8 @@ def test_count_vowels_basic():
     """Test that count_vowels returns the correct number of vowels for a basic string."""
     text = "Hello World"
     assert c.count_vowels(text) == 3
+import textutils.core as c
+
+def test_word_count_basic():
+    text = "Red red BLUE"
+    assert c.word_count(text) == {"red": 2, "blue": 1}
