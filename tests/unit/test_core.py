@@ -1,42 +1,65 @@
 import unittest
+import math
+import textutils.core as c
+# Average Word Length Tests
+def test_average_word_length_basic():
+    assert c.average_word_length("Hello world") == 5.0
 
-def replace_numbers(text):
-    """
-    Replaces single digits (0-9) in a string with their word representation.
-    Note: It handles sequential digits as individual replacements (e.g., "12" becomes "onetwo").
-    """
-    digit_map = {
-        '0': 'zero', '1': 'one', '2': 'two', '3': 'three', '4': 'four',
-        '5': 'five', '6': 'six', '7': 'seven', '8': 'eight', '9': 'nine'
-    }
-    result = []
-    for char in text:
-        # If the character is a digit and is in our map, replace it.
-        if char in digit_map:
-            result.append(digit_map[char])
-        else:
-            # Otherwise, keep the character as is.
-            result.append(char)
-    return "".join(result)
 
-class TestReplaceNumbers(unittest.TestCase):
-    def test_single_digits(self):
-        self.assertEqual(replace_numbers("1"), "one")
-        self.assertEqual(replace_numbers("9"), "nine")
+def test_average_word_length_punctuation():
+    assert c.average_word_length("Hello, world!") == 5.0
 
-    def test_mixed_text(self):
-        self.assertEqual(replace_numbers("I have 2 cats."), "I have two cats.")
-        self.assertEqual(replace_numbers("Room 4B"), "Room fourB")
 
-    def test_multiple_digits(self):
-        self.assertEqual(replace_numbers("123"), "onetwothree")
+def test_average_word_length_empty():
+    assert c.average_word_length("") == 0.0
+    assert c.average_word_length("   ") == 0.0
 
-    def test_no_digits(self):
-        self.assertEqual(replace_numbers("Hello world!"), "Hello world!")
 
-    def test_digits_in_sentence(self):
-        self.assertEqual(replace_numbers("There are 3 dogs and 7 cats."), "There are three dogs and seven cats.")
+def test_average_word_length_mixed():
+    assert math.isclose(c.average_word_length("This  is   text."), 10/3, rel_tol=1e-9)
 
-    def test_edge_case_empty_string(self):
-        self.assertEqual(replace_numbers(""), "")
+
+# Unique Words Tests
+def test_unique_words_basic():
+    assert c.unique_words("Red red BLUE") == ["blue", "red"]
+
+
+# Count Vowels Tests
+def test_count_vowels_basic():
+    assert c.count_vowels("Hello World") == 3
+
+
+# Word Count Tests
+def test_word_count_basic():
+    assert c.word_count("Red red BLUE") == {"red": 2, "blue": 1}
+
+
+# Slugify Tests
+def test_slugify_basic():
+    assert c.slugify("Hello World") == "hello-world"
+
+
+def test_slugify_with_hyphens():
+    assert c.slugify("Python-Test Driven Development") == "python-test-driven-development"
+
+
+# Count Sentences Tests
+def test_count_sentences_basic():
+    assert c.count_sentences("Hello world. How are you? Bye!") == 3
+
+
+def test_count_sentences_trailing_spaces():
+    assert c.count_sentences("Test.  ") == 1
+
+
+def test_count_sentences_empty():
+    assert c.count_sentences("") == 0
+
+
+def test_count_sentences_mixed_punctuation():
+    assert c.count_sentences("A! B? C.") == 3
+
+def test_replace_numbers():
+    assert c.replace_numbers("123") == "onetwothree"
+
 
