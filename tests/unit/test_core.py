@@ -1,42 +1,18 @@
-import unittest
+import textutils.core as c
 
-def replace_numbers(text):
-    """
-    Replaces single digits (0-9) in a string with their word representation.
-    Note: It handles sequential digits as individual replacements (e.g., "12" becomes "onetwo").
-    """
-    digit_map = {
-        '0': 'zero', '1': 'one', '2': 'two', '3': 'three', '4': 'four',
-        '5': 'five', '6': 'six', '7': 'seven', '8': 'eight', '9': 'nine'
-    }
-    result = []
-    for char in text:
-        # If the character is a digit and is in our map, replace it.
-        if char in digit_map:
-            result.append(digit_map[char])
-        else:
-            # Otherwise, keep the character as is.
-            result.append(char)
-    return "".join(result)
+# Replace Numbers Tests
+def test_replace_numbers_basic():
+    assert c.replace_numbers("I have 2 cats and 1 dog.") == "I have two cats and one dog."
 
-class TestReplaceNumbers(unittest.TestCase):
-    def test_single_digits(self):
-        self.assertEqual(replace_numbers("1"), "one")
-        self.assertEqual(replace_numbers("9"), "nine")
+def test_replace_numbers_multiple_digits():
+    assert c.replace_numbers("Room 42 is ready.") == "Room fourtwo is ready."
 
-    def test_mixed_text(self):
-        self.assertEqual(replace_numbers("I have 2 cats."), "I have two cats.")
-        self.assertEqual(replace_numbers("Room 4B"), "Room fourB")
+def test_replace_numbers_no_digits():
+    assert c.replace_numbers("Hello world!") == "Hello world!"
 
-    def test_multiple_digits(self):
-        self.assertEqual(replace_numbers("123"), "onetwothree")
+def test_replace_numbers_only_digits():
+    assert c.replace_numbers("1234567890") == "onetwothreefourfivesixseveneightninezero"
 
-    def test_no_digits(self):
-        self.assertEqual(replace_numbers("Hello world!"), "Hello world!")
-
-    def test_digits_in_sentence(self):
-        self.assertEqual(replace_numbers("There are 3 dogs and 7 cats."), "There are three dogs and seven cats.")
-
-    def test_edge_case_empty_string(self):
-        self.assertEqual(replace_numbers(""), "")
+def test_replace_numbers_mixed():
+    assert c.replace_numbers("He won 3 out of 5 games.") == "He won three out of five games."
 
