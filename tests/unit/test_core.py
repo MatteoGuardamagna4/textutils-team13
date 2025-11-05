@@ -40,7 +40,3 @@ class TestReplaceNumbers(unittest.TestCase):
     def test_edge_case_empty_string(self):
         self.assertEqual(replace_numbers(""), "")
 
-
-# Run the tests
-if _name_ == "_main_":
-    unittest.main()
